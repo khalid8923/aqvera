@@ -1,0 +1,6 @@
+{
+  "name": "aqvera-ui-ux-pro-max-tooling",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tooling directory for UI/UX Pro Max CLI installation (local, not global)"
+}

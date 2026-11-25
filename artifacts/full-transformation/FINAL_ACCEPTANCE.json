@@ -1,0 +1,125 @@
+{
+  "project": "AQVERA",
+  "report_date": "2026-11-25T19:46:01Z",
+  "overall_status": "PARTIALLY FUNCTIONAL",
+  "test_results": {
+    "backend_tests": {
+      "command": "cd backend && python -m pytest tests/",
+      "passed": 51,
+      "failed": 0,
+      "total": 51
+    },
+    "ai_tests": {
+      "command": "cd aqvera && python -m pytest ai/tests/",
+      "passed": 46,
+      "failed": 0,
+      "total": 46
+    },
+    "frontend_typescript": {
+      "command": "cd frontend && npx tsc --noEmit",
+      "status": "clean",
+      "errors": 0
+    },
+    "frontend_eslint": {
+      "command": "cd frontend && npx eslint src",
+      "errors": 0,
+      "warnings": 1,
+      "note": "1 pre-existing warning in chat/[id]/page.tsx (missing apiFetch dependency)"
+    },
+    "alembic_migration": {
+      "command": "cd backend && python -m alembic check",
+      "status": "pass",
+      "detail": "No new upgrade operations detected"
+    }
+  },
+  "feature_summary": {
+    "ai_capabilities": {
+      "total": 55,
+      "working": 0,
+      "partially_working": 7,
+      "not_implemented": 48,
+      "note": "Partial AI features use MockProvider or deterministic logic. No live provider configured."
+    },
+    "study_features": {
+      "total": 44,
+      "working": 8,
+      "partially_working": 10,
+      "not_implemented": 26
+    },
+    "academic_domains": {
+      "total": 22,
+      "working": 0,
+      "ui_only": 22,
+      "not_implemented": 22
+    },
+    "ux_features": {
+      "total": 15,
+      "working": 0,
+      "partially_working": 4,
+      "not_implemented": 11
+    }
+  },
+  "authentication": {
+    "dev_user_fallback_removed": true,
+    "jwt_required_on_all_protected_routes": true,
+    "unauthenticated_requests_rejected_401": true,
+    "ownership_isolation_enforced": true,
+    "password_change_revokes_sessions": false,
+    "note": "Password change validates current password but does not invalidate existing refresh tokens. Session revocation endpoint exists."
+  },
+  "email": {
+    "smtp_configured": false,
+    "email_config_endpoint": true,
+    "honest_not_configured_state": true,
+    "no_fake_email_claims": true
+  },
+  "database_migrations": {
+    "alembic_versioned": true,
+    "initial_migration_complete": true,
+    "additive_only": true,
+    "no_data_loss": true,
+    "alembic_check_pass": true
+  },
+  "core_student_journey": {
+    "e2e_tests": 10,
+    "e2e_tests_passed": 10,
+    "steps_verified": [
+      "register",
+      "login",
+      "onboarding",
+      "create_course",
+      "upload_material",
+      "process_material_background",
+      "ai_tutor_question_with_sources",
+      "ownership_isolation",
+      "password_change",
+      "email_config_state"
+    ],
+    "live_ai_verified": false,
+    "note": "E2E tests use MockProvider for AI. Live provider integration unverified."
+  },
+  "providers": {
+    "live_provider_configured": false,
+    "mock_provider_tested": true,
+    "smtp_configured": false,
+    "credentials_required_for_live_ai": true
+  },
+  "known_blockers": [
+    "No AI provider API key configured (OpenAI, Anthropic, Gemini) — all AI generation blocked for live use",
+    "No SMTP configured — email delivery unavailable",
+    "22 academic sections are UI only — no domain profiles",
+    "15 UX features not implemented",
+    "48 of 55 AI capabilities not implemented",
+    "26 of 44 study features not implemented",
+    "Frontend E2E Playwright tests require dev servers (ports 3000 + 8000)"
+  ],
+  "commands_to_run_locally": [
+    "cp backend/.env.example backend/.env",
+    "cd backend && python -m alembic upgrade head",
+    "cd backend && python -m uvicorn app.main:app --host 127.0.0.1 --port 8000",
+    "cd frontend && npm install && npm run dev",
+    "cd backend && python -m pytest tests/",
+    "cd aqvera && python -m pytest ai/tests/",
+    "cd frontend && npx tsc --noEmit && npx eslint src"
+  ]
+}

@@ -1,0 +1,1 @@
+The derivative of f(x) = x^2 is f'(x) = 2x. This is the power rule for differentiation.

@@ -1,0 +1,1 @@
+The derivative of f(x) = x^2 is f'(x) = 2x. The power rule states that the derivative of x^n is n*x^(n-1).
